@@ -1,0 +1,338 @@
+/* 📌 Глобальные стили */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+/* 📌 Шапка */
+.header {
+  background: #333;
+  padding: 15px;
+  text-align: center;
+}
+
+.header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.header nav ul li {
+  margin: 0 15px;
+}
+
+.header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* 📌 Контейнеры */
+.employees-container, .errors-container, .total-errors-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Кнопки */
+.add-btn {
+  background: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.add-btn:hover {
+  background: #218838;
+}
+
+.remove-btn {
+  background: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.remove-btn:hover {
+  background: #c82333;
+}
+
+/* 📌 Таблицы */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background: #007bff;
+  color: white;
+}
+
+
+
+/* 📌 Список дат */
+.dates-list {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.date-header {
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.date-header:hover {
+  background: #0056b3;
+}
+
+/* 📌 Таблица ошибок */
+.errors-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.errors-table th, .errors-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.errors-table th {
+  background: #007bff;
+  color: white;
+}
+
+/* 📌 Кнопки + и - */
+.errors-table button {
+  padding: 5px 10px;
+  font-size: 16px;
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+  background: #28a745;
+  color: white;
+  border-radius: 4px;
+}
+
+.errors-table button:hover {
+  background: #218838;
+}
+
+.errors-table button:first-child {
+  background: #dc3545;
+}
+
+.errors-table button:first-child:hover {
+  background: #c82333;
+}
+
+/* 📌 Список дат */
+.dates-list {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.date-header {
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.date-header:hover {
+  background: #0056b3;
+}
+
+/* 📌 Таблица ошибок */
+.errors-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.errors-table th, .errors-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.errors-table th {
+  background: #007bff;
+  color: white;
+}
+
+/* 📌 Кнопки + и - */
+.errors-table button {
+  padding: 5px 10px;
+  font-size: 16px;
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+  background: #28a745;
+  color: white;
+  border-radius: 4px;
+}
+
+.errors-table button:hover {
+  background: #218838;
+}
+
+.errors-table button:first-child {
+  background: #dc3545;
+}
+
+.errors-table button:first-child:hover {
+  background: #c82333;
+}
+
+
+/* 📌 Стили для календаря */
+.date-picker {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 📌 Список дат */
+.dates-list {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.date-header {
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.date-header:hover {
+  background: #0056b3;
+}
+
+/* 📌 Таблица ошибок */
+.errors-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.errors-table th, .errors-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.errors-table th {
+  background: #007bff;
+  color: white;
+}
+
+/* 📌 Кнопки + и - */
+.errors-table button {
+  padding: 5px 10px;
+  font-size: 16px;
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+  background: #28a745;
+  color: white;
+  border-radius: 4px;
+}
+
+.errors-table button:hover {
+  background: #218838;
+}
+
+.errors-table button:first-child {
+  background: #dc3545;
+}
+
+.errors-table button:first-child:hover {
+  background: #c82333;
+}
+
+
+/* 📌 Кнопка удаления даты */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: red;
+  margin-left: 10px;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}
+
+
+.export-buttons {
+  margin-top: 15px;
+}
+
+.export-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.export-btn:hover {
+  background-color: #0056b3;
+}
