@@ -236,3 +236,19 @@ th {
 .edit-btn, .remove-btn {
   margin: 3px; /* Добавляем отступы между кнопками */
 }
+
+
+.clear-btn {
+  background: #dc3545;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.clear-btn:hover {
+  background: #c82333;
+}

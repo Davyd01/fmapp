@@ -54,19 +54,18 @@ const ErrorsByDate = () => {
   };
 
   // Удаление даты
-  const deleteDate = (date) => {
-    const updatedDates = dates.filter((d) => d !== date);
-    setDates(updatedDates);
-    saveToStorage("dates", updatedDates);
-
-    // Удаляем связанные ошибки из localStorage
-    removeFromStorage(`errors_${date}`);
-    setErrors((prevErrors) => {
-      const newErrors = { ...prevErrors };
-      delete newErrors[date];
-      return newErrors;
-    });
+  const clearAllDates = () => {
+    const isConfirmed = window.confirm("Вы уверены, что хотите удалить ВСЕ даты и ошибки?");
+    if (!isConfirmed) return;
+  
+    setDates([]);
+    saveToStorage("dates", []);
+  
+    // Удаляем все ошибки из localStorage
+    dates.forEach((date) => removeFromStorage(`errors_${date}`));
+    setErrors({});
   };
+  
 
   // Переключение отображения даты
   const toggleDate = (date) => {
@@ -100,6 +99,8 @@ const ErrorsByDate = () => {
         onChange={handleDateChange} 
         className="date-picker"
       />
+      <button onClick={clearAllDates} className="clear-btn">🗑 Verwijder alle datums</button>
+
 
       <div className="dates-list">
         {dates.map((date) => (
