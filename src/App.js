@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <button onClick={() => saveData(data)}>💾 Сохранить данные</button>
+      {/* <button onClick={() => saveData(data)}>💾 Сохранить данные</button> */}
       <Routes>
         <Route path="/" element={<Employees data={data} setData={setData} />} />
         <Route path="/errors" element={<ErrorsByDate data={data} setData={setData} />} />

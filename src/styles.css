@@ -337,3 +337,11 @@ th {
 .export-btn:hover {
   background-color: #0056b3;
 }
+
+
+
+/* .list-employee {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+} */
