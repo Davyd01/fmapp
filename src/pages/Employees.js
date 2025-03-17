@@ -9,20 +9,32 @@ const Employees = () => {
   useEffect(() => {
     const localData = loadFromStorage("employees") || [];
     loadData().then((fileData) => {
-      const mergedData = [...new Set([...localData, ...fileData])]; // Убираем дубли
+      const mergedData = [...new Set([...localData, ...fileData])] // Убираем дубли
+        .sort((a, b) => a.localeCompare(b)); // Сортируем по алфавиту
       setEmployees(mergedData);
-      saveToStorage("employees", mergedData); // Обновляем localStorage
+      saveToStorage("employees", mergedData);
     });
   }, []);
+  
 
   const addEmployee = () => {
-    const name = prompt("Введите имя сотрудника:");
-    if (name) {
-      const updatedEmployees = [...employees, name];
-      setEmployees(updatedEmployees);
-      saveToStorage("employees", updatedEmployees);
+    const name = prompt("Введите имя сотрудника:").trim();
+  
+    if (!name) return; // Если имя пустое, не добавляем
+  
+    // Проверяем, есть ли уже такой сотрудник
+    if (employees.includes(name)) {
+      alert("Этот сотрудник уже есть в списке!");
+      return;
     }
+  
+    const updatedEmployees = [...employees, name]
+      .sort((a, b) => a.localeCompare(b)); // Сортируем по алфавиту
+  
+    setEmployees(updatedEmployees);
+    saveToStorage("employees", updatedEmployees);
   };
+  
 
   const removeEmployee = (name) => {
     const updatedEmployees = employees.filter((emp) => emp !== name);
