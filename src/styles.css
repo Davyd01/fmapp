@@ -252,3 +252,11 @@ th {
 .clear-btn:hover {
   background: #c82333;
 }
+
+
+
+/* Подсвечивание сотрудника с наибольшим числом ошибок */
+.highlighted {
+  font-weight: bold;
+  background-color: #ffeb3b; /* Жёлтый фон */
+}

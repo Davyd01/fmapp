@@ -6,6 +6,7 @@ import * as XLSX from "xlsx";
 const TotalErrors = () => {
   const [employees, setEmployees] = useState([]);
   const [totalErrors, setTotalErrors] = useState({});
+  const [maxErrorsEmployee, setMaxErrorsEmployee] = useState(null);
 
   useEffect(() => {
     const storedEmployees = loadFromStorage("employees") || [];
@@ -14,7 +15,7 @@ const TotalErrors = () => {
     const dates = loadFromStorage("dates") || [];
     let aggregatedErrors = {};
 
-    // Проходим по всем датам и суммируем ошибки для каждого сотрудника
+    // Считаем ошибки
     dates.forEach((date) => {
       const errors = loadFromStorage(`errors_${date}`) || {};
 
@@ -29,44 +30,26 @@ const TotalErrors = () => {
       });
     });
 
-    // Рассчитываем общий `total`
+    // Подсчитываем общий `total`
+    let maxErrors = 0;
+    let maxEmployee = null;
+    
     Object.keys(aggregatedErrors).forEach((employee) => {
       aggregatedErrors[employee].total =
         aggregatedErrors[employee].blueBox +
         aggregatedErrors[employee].overCount +
         aggregatedErrors[employee].underCount;
+
+      // Определяем человека с наибольшим числом ошибок
+      if (aggregatedErrors[employee].total > maxErrors) {
+        maxErrors = aggregatedErrors[employee].total;
+        maxEmployee = employee;
+      }
     });
 
     setTotalErrors(aggregatedErrors);
+    setMaxErrorsEmployee(maxEmployee);
   }, []);
-
-  // Данные для CSV
-  const csvData = [
-    ["Сотрудник", "Синий ящик", "Перебор книг", "Недобор книг", "Total"],
-    ...employees.map((employee) => [
-      employee,
-      totalErrors[employee]?.blueBox || 0,
-      totalErrors[employee]?.overCount || 0,
-      totalErrors[employee]?.underCount || 0,
-      totalErrors[employee]?.total || 0,
-    ]),
-  ];
-
-  // Экспорт в Excel
-  const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(
-      employees.map((employee) => ({
-        Сотрудник: employee,
-        "Синий ящик": totalErrors[employee]?.blueBox || 0,
-        "Перебор книг": totalErrors[employee]?.overCount || 0,
-        "Недобор книг": totalErrors[employee]?.underCount || 0,
-        Total: totalErrors[employee]?.total || 0,
-      }))
-    );
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Ошибки");
-    XLSX.writeFile(workbook, "Ошибки.xlsx");
-  };
 
   return (
     <div className="total-errors-container">
@@ -83,7 +66,7 @@ const TotalErrors = () => {
         </thead>
         <tbody>
           {employees.map((employee) => (
-            <tr key={employee}>
+            <tr key={employee} className={employee === maxErrorsEmployee ? "highlighted" : ""}>
               <td>{employee}</td>
               <td>{totalErrors[employee]?.blueBox || 0}</td>
               <td>{totalErrors[employee]?.overCount || 0}</td>
@@ -93,16 +76,6 @@ const TotalErrors = () => {
           ))}
         </tbody>
       </table>
-
-      {/* Кнопки экспорта */}
-      <div className="export-buttons">
-        <CSVLink data={csvData} filename="Ошибки.csv" className="export-btn">
-          Rapport makken(CSV)
-        </CSVLink>
-        <button onClick={exportToExcel} className="export-btn">
-          Rapport makken(Excel)
-        </button>
-      </div>
     </div>
   );
 };
