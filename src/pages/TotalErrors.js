@@ -6,7 +6,7 @@ import * as XLSX from "xlsx";
 const TotalErrors = () => {
   const [employees, setEmployees] = useState([]);
   const [totalErrors, setTotalErrors] = useState({});
-  const [maxErrorsEmployee, setMaxErrorsEmployee] = useState(null);
+  const [maxErrorsEmployees, setMaxErrorsEmployees] = useState([]); // Список сотрудников с максимальными ошибками
 
   useEffect(() => {
     const storedEmployees = loadFromStorage("employees") || [];
@@ -32,23 +32,24 @@ const TotalErrors = () => {
 
     // Подсчитываем общий `total`
     let maxErrors = 0;
-    let maxEmployee = null;
-    
+    let maxEmployees = [];
+
     Object.keys(aggregatedErrors).forEach((employee) => {
       aggregatedErrors[employee].total =
         aggregatedErrors[employee].blueBox +
         aggregatedErrors[employee].overCount +
         aggregatedErrors[employee].underCount;
 
-      // Определяем человека с наибольшим числом ошибок
       if (aggregatedErrors[employee].total > maxErrors) {
         maxErrors = aggregatedErrors[employee].total;
-        maxEmployee = employee;
+        maxEmployees = [employee]; // Новый максимум, обнуляем список
+      } else if (aggregatedErrors[employee].total === maxErrors) {
+        maxEmployees.push(employee); // Если одинаковое количество ошибок, добавляем в список
       }
     });
 
     setTotalErrors(aggregatedErrors);
-    setMaxErrorsEmployee(maxEmployee);
+    setMaxErrorsEmployees(maxEmployees); // Сохраняем всех лидеров по ошибкам
   }, []);
 
   return (
@@ -66,7 +67,7 @@ const TotalErrors = () => {
         </thead>
         <tbody>
           {employees.map((employee) => (
-            <tr key={employee} className={employee === maxErrorsEmployee ? "highlighted" : ""}>
+            <tr key={employee} className={maxErrorsEmployees.includes(employee) ? "highlighted" : ""}>
               <td>{employee}</td>
               <td>{totalErrors[employee]?.blueBox || 0}</td>
               <td>{totalErrors[employee]?.overCount || 0}</td>
