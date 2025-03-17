@@ -63,6 +63,7 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  margin: 10px;
 }
 
 .remove-btn:hover {
