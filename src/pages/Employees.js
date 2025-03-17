@@ -87,8 +87,8 @@ const Employees = () => {
               <td>{index + 1}</td>
               <td>{employee}</td>
               <td>
-                <button onClick={() => renameEmployee(employee)} className="edit-btn">✏️ Bewerken</button>
-                <button onClick={() => removeEmployee(employee)} className="remove-btn">🗑️ Verwijderen</button>
+                <button onClick={() => renameEmployee(employee)} className="edit-btn">Bewerken</button>
+                <button onClick={() => removeEmployee(employee)} className="remove-btn">Verwijderen</button>
               </td>
             </tr>
           ))}
