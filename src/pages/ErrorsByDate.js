@@ -53,7 +53,34 @@ const ErrorsByDate = () => {
     }
   };
 
-  // Удаление даты
+  // Удаление конкретной даты
+  const deleteDate = (date) => {
+    const isConfirmed = window.confirm(`Вы уверены, что хотите удалить ${date}?`);
+    if (!isConfirmed) return;
+
+    const updatedDates = dates.filter(d => d !== date);
+    setDates(updatedDates);
+    saveToStorage("dates", updatedDates);
+
+    // Удаляем ошибки, связанные с этой датой
+    removeFromStorage(`errors_${date}`);
+    
+    // Удаляем данные об ошибках из состояния
+    setErrors(prevErrors => {
+      const updatedErrors = { ...prevErrors };
+      delete updatedErrors[date];
+      return updatedErrors;
+    });
+
+    // Убираем раскрытие даты
+    setExpandedDates(prev => {
+      const updatedExpanded = { ...prev };
+      delete updatedExpanded[date];
+      return updatedExpanded;
+    });
+  };
+
+  // Удаление всех дат
   const clearAllDates = () => {
     const isConfirmed = window.confirm("Вы уверены, что хотите удалить ВСЕ даты и ошибки?");
     if (!isConfirmed) return;
@@ -65,7 +92,6 @@ const ErrorsByDate = () => {
     dates.forEach((date) => removeFromStorage(`errors_${date}`));
     setErrors({});
   };
-  
 
   // Переключение отображения даты
   const toggleDate = (date) => {
@@ -100,7 +126,6 @@ const ErrorsByDate = () => {
         className="date-picker"
       />
       <button onClick={clearAllDates} className="clear-btn">🗑 Очистить все даты</button>
-
 
       <div className="dates-list">
         {dates.map((date) => (
